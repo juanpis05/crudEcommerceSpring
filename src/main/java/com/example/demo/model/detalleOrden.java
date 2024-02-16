@@ -1,20 +1,43 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "detalles")
 public class detalleOrden {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private double cantidad;
 	private double precio;
 	private double total;
 	
-	public detalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
+	@OneToOne
+	private orden orden;
+	
+	@ManyToOne
+	private producto producto;
+	
+	
+
+	public detalleOrden(Integer id, String nombre, double cantidad, double precio, double total,
+			com.example.demo.model.orden orden, com.example.demo.model.producto producto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.precio = precio;
 		this.total = total;
+		this.orden = orden;
+		this.producto = producto;
 	}
 
 	public Integer getId() {
@@ -55,6 +78,22 @@ public class detalleOrden {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	public orden getOrden() {
+		return orden;
+	}
+
+	public void setOrden(orden orden) {
+		this.orden = orden;
+	}
+
+	public producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(producto producto) {
+		this.producto = producto;
 	}
 
 	@Override
