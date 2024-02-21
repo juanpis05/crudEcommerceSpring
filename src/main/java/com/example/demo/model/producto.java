@@ -23,9 +23,13 @@ public class producto {
 	@ManyToOne
 	private usuario usuario;
 	
+	public producto() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	public producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad,
-			com.example.demo.model.usuario usuario) {
+			usuario usuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

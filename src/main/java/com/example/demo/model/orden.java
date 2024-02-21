@@ -10,11 +10,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "ordenes")
 public class orden {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -22,25 +21,20 @@ public class orden {
 	private Date fechaCreacion;
 	private Date fechaRecibido;
 	private double total;
-	
+
 	@ManyToOne
 	private usuario usuario;
-	
+
 	@OneToOne(mappedBy = "orden")
 	private detalleOrden detalle;
-	
-	
 
-	public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibido, double total,
-			com.example.demo.model.usuario usuario, detalleOrden detalle) {
+	public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibido, double total) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibido = fechaRecibido;
 		this.total = total;
-		this.usuario = usuario;
-		this.detalle = detalle;
 	}
 
 	public Integer getId() {
@@ -82,29 +76,11 @@ public class orden {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
-	public usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public detalleOrden getDetalle() {
-		return detalle;
-	}
-
-	public void setDetalle(detalleOrden detalle) {
-		this.detalle = detalle;
-	}
 
 	@Override
 	public String toString() {
 		return "orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibido="
 				+ fechaRecibido + ", total=" + total + "]";
 	}
-	
-	
 
 }

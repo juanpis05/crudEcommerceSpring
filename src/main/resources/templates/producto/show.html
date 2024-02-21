@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+
+<!-- Inclusión de la cabecera -->
+<head th:include="administrador/template_admin.html::head"></head>
+
+<body>
+	
+	<!-- Inclusión del navbar y sidebar -->
+	<div th:include="administrador/template_admin.html::header"></div>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Data Tables</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item">Tables</li>
+					<li class="breadcrumb-item active">Data</li>
+				</ol>
+			</nav>
+		</div><!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<a class="btn btn-success mt-3" th:href="@{/producto/create}">Nuevo producto</a></td>
+
+							<h5 class="card-title">Datatables</h5>
+
+							<!-- Table with stripped rows -->
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<th>Nombre Producto</th>
+										<th>Descripción</th>
+										<th>Cantidad(inventario)</th>
+										<th>Precio</th>
+										<th>Acción</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="producto:${productos}">
+										<td th:text="${producto.nombre}"></td>
+										<td th:text="${producto.descripcion}"></td>
+										<td th:text="${producto.cantidad}"></td>
+										<td th:text="${producto.precio}"></td>
+										<td>
+											<a class="btn btn-warning" th:href="@{producto/edit/{id} (id=${producto.id})}">Editar</a>
+											<a class="btn btn-danger" th:href="@{producto/delete/{id} (id=${producto.id})}">Eliminar</a>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+							<!-- End Table with stripped rows -->
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main><!-- End #main -->
+
+	<!-- Inclusión del pie -->
+	<div th:include="administrador/template_admin.html::footer"></div>
+
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+			class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Inclusión archivos JS -->
+	<div th:include="administrador/template_admin.html::archivosJS"></div>
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "detalles")
 public class detalleOrden {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -19,25 +19,20 @@ public class detalleOrden {
 	private double cantidad;
 	private double precio;
 	private double total;
-	
+
 	@OneToOne
 	private orden orden;
-	
+
 	@ManyToOne
 	private producto producto;
-	
-	
 
-	public detalleOrden(Integer id, String nombre, double cantidad, double precio, double total,
-			com.example.demo.model.orden orden, com.example.demo.model.producto producto) {
+	public detalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.precio = precio;
 		this.total = total;
-		this.orden = orden;
-		this.producto = producto;
 	}
 
 	public Integer getId() {
@@ -80,28 +75,10 @@ public class detalleOrden {
 		this.total = total;
 	}
 
-	public orden getOrden() {
-		return orden;
-	}
-
-	public void setOrden(orden orden) {
-		this.orden = orden;
-	}
-
-	public producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(producto producto) {
-		this.producto = producto;
-	}
-
 	@Override
 	public String toString() {
 		return "detalleOrden [id=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio
 				+ ", total=" + total + "]";
 	}
-	
-	
-	
+
 }
