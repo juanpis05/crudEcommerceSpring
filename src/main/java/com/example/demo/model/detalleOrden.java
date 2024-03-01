@@ -25,6 +25,10 @@ public class detalleOrden {
 
 	@ManyToOne
 	private producto producto;
+	
+	public detalleOrden() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public detalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
 		super();
@@ -73,6 +77,22 @@ public class detalleOrden {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	public orden getOrden() {
+		return orden;
+	}
+
+	public void setOrden(orden orden) {
+		this.orden = orden;
+	}
+
+	public producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(producto producto) {
+		this.producto = producto;
 	}
 
 	@Override

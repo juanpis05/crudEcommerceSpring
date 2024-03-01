@@ -33,7 +33,7 @@ public class usuario {
 	private List<orden> ordenes;
 
 	public usuario() {
-
+		// TODO Auto-generated constructor stub
 	}
 
 	public usuario(Integer id, String nombre, String documento, String username, String email, String direccion,

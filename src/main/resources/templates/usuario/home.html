@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+<!-- Inclusión cabecera -->
+
+<head th:include="usuario/template_user.html::head"></head>
+
+<body>
+	<!-- Inclusión Header -->
+	<div th:include="usuario/template_user.html::header"></div>
+	<section class="bg-dark"></section>
+	<main id="main">
+		<!-- ======= Cards de la base de datos ======= -->
+		<section id="about" class="about">
+			<div class="container" data-aos="fade-up">
+				<div class="row text-center">
+					<div class="col-lg-3 col-md-6 mb-4" th:each="producto:${producto}">
+						<div class="card h-100">
+							<img class="card-img-top" th:src="@{/images/{img} (img=${producto.imagen})}">
+							<div class="card-body">
+								<h3 class="card-text text-primary" th:text="${producto.nombre}"></h3>
+								<h5 class="card-text" th:text="${producto.descripcion}"></h5>
+								<p th:text="'Hay ' + ${producto.cantidad} + ' elementos de este tipo'"></p>
+							</div>
+							<div class="card-footer">
+								<a th:href="@{/productoHome/{id} (id=${producto.id})}" class="btn btn-secondary">Ver producto</a>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- ======= Fin cards ======= -->
+
+		<!-- ======= Portfolio Section ======= -->
+		<section id="portfolio" class="portfolio">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Ecommerce</h2>
+					<p>Crud - Juanpis</p>
+				</div>
+
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
+					<div class="col-lg-12 d-flex justify-content-center">
+						<ul id="portfolio-flters">
+							<li data-filter="*" class="filter-active">Electrodomésticos</li>
+							<li data-filter=".filter-app">App</li>
+							<li data-filter=".filter-card">Card</li>
+							<li data-filter=".filter-web">Web</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+					<div class="col-lg-4 col-md-6 portfolio-item filter-app" th:each="producto: ${producto}">
+						<div class="portfolio-wrap">
+							<img th:src="@{/images/{img} (img=${producto.imagen})}" class="img-fluid" alt="">
+							<div class="portfolio-info">
+								<h4 th:text="${producto.nombre}"></h4>
+								<p th:text="${producto.descripcion}"></p>
+								<p th:text="${producto.precio}"></p>
+								<a th:href="@{/productoHome/{id} (id=${producto.id})}" class="btn btn-secondary">Ver producto</a>
+								<div class="portfolio-links">
+									<a th:href="@{/images/{img} (img=${producto.imagen})}" data-gallery="portfolioGallery"
+										class="portfolio-lightbox" th:title="${producto.nombre}"><i class="bx bx-plus"></i></a>
+									<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+
+				</div>
+
+			</div>
+		</section><!-- End Portfolio Section -->
+	</main><!-- End #main -->
+
+	<div th:include="usuario/template_user.html::footer"></div>
+
+	<div id="preloader"></div>
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+			class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Inclusión archivos JS -->
+	<div th:include="usuario/template_user.html::archivosJS"></div>
+
+</body>
+
+</html>

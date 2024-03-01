@@ -27,6 +27,10 @@ public class orden {
 
 	@OneToOne(mappedBy = "orden")
 	private detalleOrden detalle;
+	
+	public orden() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibido, double total) {
 		super();
