@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.producto;
 import com.example.demo.model.usuario;
-import com.example.demo.service.productoService;
+import com.example.demo.service.iProductoService;
 import com.example.demo.service.uploadFileService;
 
 import ch.qos.logback.classic.Logger;
@@ -28,7 +28,7 @@ public class productoController {
 	private final Logger LOGGER = (Logger) LoggerFactory.getLogger(productoController.class);
 
 	@Autowired
-	private productoService productoService;
+	private iProductoService productoService;
 
 	// variable para la carga de imagenes
 	@Autowired

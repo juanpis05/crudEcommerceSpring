@@ -1,13 +1,14 @@
 package com.example.demo.model;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,18 +23,34 @@ public class orden {
 	private Date fechaRecibido;
 	private double total;
 
+	public usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<detalleOrden> getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(List<detalleOrden> detalle) {
+		this.detalle = detalle;
+	}
+
 	@ManyToOne
 	private usuario usuario;
 
-	@OneToOne(mappedBy = "orden")
-	private detalleOrden detalle;
+	@OneToMany(mappedBy = "orden")
+	private List<detalleOrden> detalle;
 	
 	public orden() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibido, double total) {
-		super();
+		super(); 
 		this.id = id;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.example.demo.model.producto;
 
-public interface productoService {
+public interface iProductoService {
 	// create
 	public producto save(producto producto);
 
@@ -15,6 +15,7 @@ public interface productoService {
 	public void update(producto producto);
 
 	public void delete(Integer id);
-	//listas - table
+
+	// listas - table
 	public List<producto> findAll();
 }

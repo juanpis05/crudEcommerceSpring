@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.model.detalleOrden;
 import com.example.demo.model.orden;
 import com.example.demo.model.producto;
-import com.example.demo.service.productoService;
+import com.example.demo.model.usuario;
+import com.example.demo.service.iProductoService;
+import com.example.demo.service.iUsuarioService;
 
 import ch.qos.logback.classic.Logger;
 
@@ -30,7 +32,10 @@ public class userController {
 
 	// Instancia del servicio de productos
 	@Autowired
-	private productoService productoService;
+	private iProductoService productoService;
+	
+	@Autowired
+	private iUsuarioService usuarioService;
 
 	// Lista
 	List<detalleOrden> detalles = new ArrayList<detalleOrden>();
@@ -128,6 +133,16 @@ public class userController {
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		return "usuario/carrito";
+	}
+	
+	//Método para pasar a la vista de resumen de la orden
+	@GetMapping("/order")
+	public String order(Model model) {
+		usuario usuario = usuarioService.findById(1).get();
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
+		return "/usuario/resumenOrden";
 	}
 
 }

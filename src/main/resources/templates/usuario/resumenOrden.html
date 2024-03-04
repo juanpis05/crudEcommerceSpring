@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+<!-- Inclusión cabecera -->
+
+<head th:include="usuario/template_user.html::head"></head>
+
+<body>
+	<!-- Inclusión Header -->
+	<div th:include="usuario/template_user.html::header"></div>
+	<section class="bg-dark"></section>
+	<main id="main">
+		<div class="container">
+			<h1 class="mt-4 mb-3">
+				eCommerce - Juanpis<small>Resumen de la orden</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a th:href="@{/}">Home</a>
+				</li>
+				<li class="breadcrumb-item active">Orden</li>
+			</ol>
+			<div class="card mb-4">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-9">
+							<div class="card-body">
+								<h5 class="card-title">Datos de la orden</h5><br>
+								<h6 th:text="'Nombre: ' +${usuario.nombre}"></h6>
+								<h6 th:text="'Email: ' +${usuario.email}"></h6>
+								<h6 th:text="'Dirección: ' +${usuario.direccion}"></h6><br>
+								<h5 class="card-title">Productos</h5>
+								<div class="alert alert-light" role="alert">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Producto</th>
+												<th scope="col">Precio</th>
+												<th scope="col">Cantidad</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="detalleTotalOrden:${cart}">
+												<td th:text="${detalleTotalOrden.nombre}"></td>
+												<td th:text="${detalleTotalOrden.precio}"></td>
+												<td th:text="${detalleTotalOrden.cantidad}"></td>
+												<td th:text="${detalleTotalOrden.total}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<h2 class="card-title">Resumen Orden</h2>
+							<ul class="list-group">
+								<li class="list-group-item">
+									<h5 th:text="'Total: ' + ${orden.total}"></h5>
+								</li>
+								<a th:href="@{saveOrder}" class="btn btn-dark">Generar</a>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</main><!-- End #main -->
+
+	<div th:include="usuario/template_user.html::footer"></div>
+
+	<div id="preloader"></div>
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+			class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Inclusión archivos JS -->
+	<div th:include="usuario/template_user.html::archivosJS"></div>
+
+</body>
+
+</html>
