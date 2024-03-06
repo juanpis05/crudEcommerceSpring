@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import com.example.demo.model.detalleOrden;
 import com.example.demo.model.orden;
 import com.example.demo.model.producto;
 import com.example.demo.model.usuario;
+import com.example.demo.service.iDetalleOrdenService;
+import com.example.demo.service.iOrdenService;
 import com.example.demo.service.iProductoService;
 import com.example.demo.service.iUsuarioService;
 
@@ -36,6 +40,12 @@ public class userController {
 	
 	@Autowired
 	private iUsuarioService usuarioService;
+	
+	@Autowired
+	private iOrdenService ordenService;
+	
+	@Autowired
+	private iDetalleOrdenService detalleOrdenService;
 
 	// Lista
 	List<detalleOrden> detalles = new ArrayList<detalleOrden>();
@@ -143,6 +153,36 @@ public class userController {
 		model.addAttribute("orden", orden);
 		model.addAttribute("usuario", usuario);
 		return "/usuario/resumenOrden";
+	}
+	
+	@GetMapping("/saveOrder")
+	public String saveOrder() {
+		Date fechaCreacion = new Date();
+		orden.setFechaCreacion(fechaCreacion);
+		orden.setNumero(ordenService.generarNumeroOrden());
+		usuario usuario = usuarioService.findById(1).get();
+		orden.setUsuario(usuario);
+		ordenService.save(orden);
+		//Guardar los detalles de la orden
+		for(detalleOrden dt : detalles) {
+			dt.setOrden(orden);
+			detalleOrdenService.save(dt);
+		}
+		//Limpiar valores
+		orden = new orden();
+		detalles.clear();
+		return "redirect:/";
+	}
+	
+	@PostMapping("/search")
+	public String searchProduct(@RequestParam String nombre, Model model) {
+		LOGGER.info("Nombre del producto: {}", nombre);
+		List<producto> productos = productoService.findAll()
+				.stream().filter(p -> p.getNombre().toUpperCase()
+				.contains(nombre.toUpperCase()))
+				.collect(Collectors.toList());
+		model.addAttribute("producto", productos);
+		return "usuario/home";
 	}
 
 }

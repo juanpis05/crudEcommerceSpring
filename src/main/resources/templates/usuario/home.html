@@ -7,7 +7,9 @@
 <body>
 	<!-- Inclusión Header -->
 	<div th:include="usuario/template_user.html::header"></div>
-	<section class="bg-dark"></section>
+	<section class="bg-dark"><br>
+	<div class="container" th:include="usuario/template_user.html::searchBar"></div>
+	</section>
 	<main id="main">
 		<!-- ======= Cards de la base de datos ======= -->
 		<section id="about" class="about">
