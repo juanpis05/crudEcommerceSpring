@@ -17,8 +17,8 @@ public class usuarioServiceImplement implements iUsuarioService{
 
 	@Override
 	public usuario save(usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return usuarioRepository.save(usuario);
 	}
 
 	@Override
@@ -41,7 +41,6 @@ public class usuarioServiceImplement implements iUsuarioService{
 
 	@Override
 	public Optional<usuario> findById(Integer id) {
-		// TODO Auto-generated method stub
 		return usuarioRepository.findById(id);
 	}
 
